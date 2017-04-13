@@ -1,17 +1,20 @@
 CC=gcc
 CXX=g++
 CPPFLAGS=
-CFLAGS=-Wall -Wextra -Wpedantic
-CXXFLAGS=-Wall -Wextra -Wpedantic
+CFLAGS=-Wall -Wextra -Wpedantic $(INCLUDEDIRS)
+CXXFLAGS=-Wall -Wextra -Wpedantic $(INCLUDEDIRS)
 LDLIBS=
 LDFLAGS=
-TARGET=quux
+TARGET=quuz
 
 SOURCES=Main.cpp \
 	Foo/Foo.cpp \
 	Bar.c \
 	Baz.cpp \
 	Qux/Qux.cpp
+
+INCLUDES=Qux \
+	Quux
 
 BUILDDIR=.build
 DEPDIR=$(BUILDDIR)/dep
@@ -25,12 +28,15 @@ $(shell mkdir -p $(BINDIR))
 
 SUBTOOBJ=$(subst /,_0x2F_,$(1))
 SUBTOSRC=$(subst _0x2F_,/,$(notdir $(1)))
+SUBINCDIR=$(addprefix -I,$(1))
 
 DEPFLAGS=-MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 COMPILE.c=$(CC) $(DEPFLAGS) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 COMPILE.cpp=$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 POSTCOMPILE=mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 LINK.o=$(CXX) $(LDFLAGS) $(TARGET_ARCH)
+
+INCLUDEDIRS=$(call SUBINCDIR,$(INCLUDES))
 
 OBJECTS=$(filter %.c %.cpp,$(SOURCES))
 OBJECTS:=$(basename $(OBJECTS))
