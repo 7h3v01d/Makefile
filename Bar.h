@@ -1,5 +1,5 @@
-#ifndef __BAR_H__
-#define __BAR_H__
+#ifndef BAR_H
+#define BAR_H
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,5 +1,5 @@
-#ifndef __QUX_H__
-#define __QUX_H__
+#ifndef QUX_H
+#define QUX_H
 
 #include "../Baz.h"
 

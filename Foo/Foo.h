@@ -1,5 +1,5 @@
-#ifndef __FOO_H__
-#define __FOO_H__
+#ifndef FOO_H
+#define FOO_H
 
 class Foo
 {

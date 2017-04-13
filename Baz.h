@@ -1,5 +1,5 @@
-#ifndef __BAZ_H__
-#define __BAZ_H__
+#ifndef BAZ_H
+#define BAZ_H
 
 class Baz
 {
